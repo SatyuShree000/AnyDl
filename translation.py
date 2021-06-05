@@ -1,7 +1,14 @@
 class Translation(object):
-    START_TEXT = """ലഭ്യമായ ഓപ്പൺ സോഴ്‌സ് കോഡ് ഉപയോഗിച്ച് സൃഷ്‌ടിച്ച  ഒരു Bot ആണ് @upindiamobibot clone created using the Open Source code available.
-Channel: © @Latest_Malayalam
- @upindiamobibot"""
+    START_TEXT = """Hello,
+i am Telegram URL Upload Bot! Created by @shreevish
+Please send me any direct download URL Link, i can upload to telegram as File/Video
+ 🚨 . . . Note : its support almost all direct Url's except torrent link & some links . . . 🚨
+ 
+🚨 PRON video🔞 Links gives you PERMANENT BAN 🚨
+       ┈┈┈••💙✿❤️✿💚••┈┈┈
+       
+URL-UPLOADER bot created by @shreevish
+⚠️Note :- Join My Channel before paste the link"""
     RENAME_403_ERR = "Sorry. You are not permitted to rename this file."
     ABS_TEXT = " Please don't be selfish."
     UPGRADE_TEXT = "This is an @upindiamobibot clone created using the Open Source <a href='https://t.me/Latest_Malayalam'>code</a>. \nStart @upindiamobibot to know Paid Plans!"
