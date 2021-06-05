@@ -8,7 +8,7 @@ import random
 import time
 import os
 from PIL import Image
-from config import Config 
+from sample_config import Config
 from translation import Translation
 from Tools.progress import progress_for_pyrogram
 from Tools.screenshot import take_screen_shot
