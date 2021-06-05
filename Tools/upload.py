@@ -7,7 +7,7 @@ import os
 import time
 import pyrogram
 from Tools.progress import progress_for_pyrogram
-from translation import Translation
+from translation1 import Translation
 
 
 async def upload_video(c, m, send, media_location, thumb_image_path, duration, width, height):
