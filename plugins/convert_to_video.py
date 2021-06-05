@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 import pyrogram
 from config import Config 
 from pyrogram import Client, filters
-from translation import Translation
+from translation1 import Translation
 from Tools.Download import download
 
 @Client.on_message(filters.command(["c2v"]))
