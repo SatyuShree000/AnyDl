@@ -10,7 +10,7 @@ class Config(object):
     API_HASH = os.environ.get("API_HASH")
     # Get these values from my.telegram.org
     # Array to store users who are authorized to use the bot
-    AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS","1307550350 1243382770 -1001250642164").split())
+    AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS","'1307550350''1243382770''-1001250642164'").split())
     # the download location, where the HTTP Server runs
     BANNED_USERS = set(int(x) for x in os.environ.get("BANNED_USERS", "").split())
     # the download location, where the HTTP Server runs
