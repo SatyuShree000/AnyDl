@@ -3,7 +3,7 @@ import os
 import time
 
 from sample_config import Config
-from translation import Translation
+from translation1 import Translation
 
 
 async def progress_for_pyrogram(
