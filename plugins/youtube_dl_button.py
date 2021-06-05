@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# (c) Shreenidhi N Koppal
 
 # the logging things
 import logging
@@ -326,7 +326,7 @@ async def youtube_dl_call_back(bot, update):
                 i = 0
                 caption = "© @All_Movie_Rockers"
                 if is_w_f:
-                    caption = "/upgrade to Plan D to remove the watermark\n© @All_Movie_Rockers"
+                    caption = "/upgrade to Plan D to remove the watermark\n© @ALL_Movie_Rockers"
                 for image in images:
                     if os.path.exists(str(image)):
                         if i == 0:
