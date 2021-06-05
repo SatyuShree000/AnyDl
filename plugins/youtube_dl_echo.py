@@ -13,7 +13,7 @@ import json
 import math
 import os
 import time
-
+from PIL import Image
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
@@ -30,22 +30,34 @@ from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import humanbytes
 from helper_funcs.help_uploadbot import DownLoadFile
 
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import UserNotParticipant, UserBannedInChannel
 
 @pyrogram.Client.on_message(pyrogram.filters.regex(pattern=".*http.*"))
 async def echo(bot, update):
-    if update.from_user.id not in Config.AUTH_USERS:
-        await bot.delete_messages(
-            chat_id=update.chat.id,
-            message_ids=update.message_id,
-            revoke=True
-        )
+    if update.from_user.id in Config.BANNED_USERS:
+        await update.reply_text("You are B A N N E D 🤣🤣🤣🤣")
         return
-    # logger.info(update)
     TRChatBase(update.from_user.id, update.text, "/echo")
-    # await bot.send_chat_action(
-    #     chat_id=update.chat.id,
-    #     action="typing"
-    # )
+    update_channel = Config.UPDATE_CHANNEL
+    if update_channel:
+        try:
+            user = await bot.get_chat_member(update_channel, update.chat.id)
+            if user.status == "kicked":
+               await update.reply_text("🤭 Sorry Dude, You are **B A N N E D 🤣🤣🤣**")
+               return
+        except UserNotParticipant:
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+            await update.reply_text(
+                text="**Join My Updates Channel to use ME 😎 🤭**",
+                reply_markup=InlineKeyboardMarkup([
+                    [ InlineKeyboardButton(text="Join My Updates Channel", url=f"https://t.me/{update_channel}")]
+              ])
+            )
+            return
+        except Exception:
+            await update.reply_text("Something Wrong. Contact my Support Group")
+            return
     logger.info(update.from_user)
     url = update.text
     youtube_dl_username = None
@@ -169,11 +181,11 @@ async def echo(bot, update):
                     "file", format_id, format_ext)
                 if format_string is not None and not "audio only" in format_string:
                     ikeyboard = [
-                        pyrogram.InlineKeyboardButton(
+                        InlineKeyboardButton(
                             "S " + format_string + " video " + approx_file_size + " ",
                             callback_data=(cb_string_video).encode("UTF-8")
                         ),
-                        pyrogram.InlineKeyboardButton(
+                        InlineKeyboardButton(
                             "D " + format_ext + " " + approx_file_size + " ",
                             callback_data=(cb_string_file).encode("UTF-8")
                         )
@@ -182,7 +194,7 @@ async def echo(bot, update):
                         cb_string_video_message = "{}|{}|{}".format(
                             "vm", format_id, format_ext)
                         ikeyboard.append(
-                            pyrogram.InlineKeyboardButton(
+                            InlineKeyboardButton(
                                 "VM",
                                 callback_data=(
                                     cb_string_video_message).encode("UTF-8")
@@ -191,13 +203,13 @@ async def echo(bot, update):
                 else:
                     # special weird case :\
                     ikeyboard = [
-                        pyrogram.InlineKeyboardButton(
+                        InlineKeyboardButton(
                             "SVideo [" +
                             "] ( " +
                             approx_file_size + " )",
                             callback_data=(cb_string_video).encode("UTF-8")
                         ),
-                        pyrogram.InlineKeyboardButton(
+                        InlineKeyboardButton(
                             "DFile [" +
                             "] ( " +
                             approx_file_size + " )",
@@ -210,13 +222,13 @@ async def echo(bot, update):
                 cb_string_128 = "{}|{}|{}".format("audio", "128k", "mp3")
                 cb_string = "{}|{}|{}".format("audio", "320k", "mp3")
                 inline_keyboard.append([
-                    pyrogram.InlineKeyboardButton(
+                    InlineKeyboardButton(
                         "MP3 " + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
-                    pyrogram.InlineKeyboardButton(
+                    InlineKeyboardButton(
                         "MP3 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
                 ])
                 inline_keyboard.append([
-                    pyrogram.InlineKeyboardButton(
+                    InlineKeyboardButton(
                         "MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
                 ])
         else:
@@ -227,11 +239,11 @@ async def echo(bot, update):
             cb_string_video = "{}|{}|{}".format(
                 "video", format_id, format_ext)
             inline_keyboard.append([
-                pyrogram.InlineKeyboardButton(
+                InlineKeyboardButton(
                     "SVideo",
                     callback_data=(cb_string_video).encode("UTF-8")
                 ),
-                pyrogram.InlineKeyboardButton(
+                InlineKeyboardButton(
                     "DFile",
                     callback_data=(cb_string_file).encode("UTF-8")
                 )
@@ -241,16 +253,16 @@ async def echo(bot, update):
             cb_string_video = "{}={}={}".format(
                 "video", format_id, format_ext)
             inline_keyboard.append([
-                pyrogram.InlineKeyboardButton(
+                InlineKeyboardButton(
                     "video",
                     callback_data=(cb_string_video).encode("UTF-8")
                 ),
-                pyrogram.InlineKeyboardButton(
+                InlineKeyboardButton(
                     "file",
                     callback_data=(cb_string_file).encode("UTF-8")
                 )
             ])
-        reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
         # logger.info(reply_markup)
         thumbnail = Config.DEF_THUMB_NAIL_VID_S
         thumbnail_image = Config.DEF_THUMB_NAIL_VID_S
@@ -261,13 +273,18 @@ async def echo(bot, update):
         thumb_image_path = DownLoadFile(
             thumbnail_image,
             Config.DOWNLOAD_LOCATION + "/" +
-            str(update.from_user.id) + ".jpg",
+            str(update.from_user.id) + ".webp",
             Config.CHUNK_SIZE,
             None,  # bot,
             Translation.DOWNLOAD_START,
             update.message_id,
             update.chat.id
         )
+        if os.path.exists(thumb_image_path):
+            im = Image.open(thumb_image_path).convert("RGB")
+            im.save(thumb_image_path.replace(".webp", ".jpg"), "jpeg")
+        else:
+            thumb_image_path = None
         await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION.format(thumbnail) + "\n" + Translation.SET_CUSTOM_USERNAME_PASSWORD,
@@ -283,16 +300,16 @@ async def echo(bot, update):
         cb_string_video = "{}={}={}".format(
             "video", "OFL", "ENON")
         inline_keyboard.append([
-            pyrogram.InlineKeyboardButton(
+            InlineKeyboardButton(
                 "SVideo",
                 callback_data=(cb_string_video).encode("UTF-8")
             ),
-            pyrogram.InlineKeyboardButton(
+            InlineKeyboardButton(
                 "DFile",
                 callback_data=(cb_string_file).encode("UTF-8")
             )
         ])
-        reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
         await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.FORMAT_SELECTION.format(""),
@@ -300,3 +317,4 @@ async def echo(bot, update):
             parse_mode="html",
             reply_to_message_id=update.message_id
         )
+© 2021 GitHub, Inc.
