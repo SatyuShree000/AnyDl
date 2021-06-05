@@ -30,9 +30,9 @@ from helper_funcs.display_progress import progress_for_pyrogram
 from pyrogram.types import InputMediaPhoto
 
 
-@pyrogram.Client.on_message(pyrogram.filters.command(["generatescss"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["scrn"]))
 async def generate_screen_shot(bot, update):
-    TRChatBase(update.from_user.id, update.text, "generatescss")
+    TRChatBase(update.from_user.id, update.text, "scrn")
     if update.reply_to_message is not None:
         download_location = Config.DOWNLOAD_LOCATION + "/"
         a = await bot.send_message(
