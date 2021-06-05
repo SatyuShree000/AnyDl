@@ -80,29 +80,3 @@ You can use /rename command after receiving file to rename it with custom thumbn
     ZIP_UPLOADED_STR = "Uploaded {} files in {} seconds"
     FREE_USER_LIMIT_Q_SZE = """ """
     SLOW_URL_DECED = "Gosh that seems to be a very slow URL. Since you were screwing my home, I am in no mood to download this file. Meanwhile, why don't you try this:==> https://shrtz.me/PtsVnf6 and get me a fast URL so that I can upload to Telegram, without me slowing down for other users."
-    
-##############################################################################################################################
-##############################################################################################################################
-
-
-#DON'T CHANGE THE NUMBERS IN THE FLOWER BRACKETS AND THE ORDER OF PERCENTAGE, DONE, TOTAL, SPEED, ETA ONLY CHANGE THE THEME 
-
-PROGRESS = """
-Percentage : {0}%
-Done ✅: {1}
-Total 🌀: {2}
-Speed 🚀: {3}/s
-ETA 🕰: {4}
-"""
-       
-      DOWNLOAD_PROGRESS = "▪️"
-      UPLOAD_PROGRESS = "▫️"
-
-##############################################################################################################################
-##############################################################################################################################
-
-    DOWNLOAD_COMPLETE = "✅ Media Downloaded successfully\nPreparing for upload"
-    UPLOAD_COMPLETE = "THANKS FOR USING ME \n Sponsered By :- @All_Movie_Rockers"
-    REPLY_TEXT = "👩‍✈️ Reply to the media which you need to convert"
-    
-    
