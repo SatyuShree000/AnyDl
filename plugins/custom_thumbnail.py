@@ -104,7 +104,7 @@ async def save_photo(bot, update):
         )
 
 
-@pyrogram.Client.on_message(pyrogram.filters.command(["deletethumbnail"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["delthumb"]))
 async def delete_thumbnail(bot, update):
     TRChatBase(update.from_user.id, update.text, "deletethumbnail")
     download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
