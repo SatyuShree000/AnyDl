@@ -4,7 +4,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 import pyrogram
-from config import Config 
+from sample_config import Config 
 from pyrogram import Client, filters
 from translation1 import Translation
 from Tools.Download import download
