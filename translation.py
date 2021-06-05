@@ -40,7 +40,7 @@ URL-UPLOADER bot created by @shreevish
     AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS = "Thanks for using me. \nDownloaded in {} seconds. \nJoin : @All_Movie_Rockers . \nUploaded in {} seconds."
     NOT_AUTH_USER_TEXT = "Please /upgrade your subscription."
     NOT_AUTH_USER_TEXT_FILE_SIZE = "Detected File Size: {}. Free Users can only upload: {}\nPlease /upgrade your subscription.\nIf you think this is a bug, please contact <a href='https://telegram.dog/shreevish'>꧁★HACKER★꧂</a>"
-    SAVED_CUSTOM_THUMB_NAIL = "Custom video / file thumbnail saved. This image will be used in the video / file."
+    SAVED_CUSTOM_THUMB_NAIL = "✅ Saved Thumbnail Successfully. This will be deleted in 24hrs"
     DEL_ETED_CUSTOM_THUMB_NAIL = "✅ Custom thumbnail cleared succesfully."
     FF_MPEG_DEL_ETED_CUSTOM_MEDIA = "✅ Media cleared succesfully."
     SAVED_RECVD_DOC_FILE = "✅ Document Downloaded Successfully."
@@ -80,3 +80,7 @@ You can use /rename command after receiving file to rename it with custom thumbn
     ZIP_UPLOADED_STR = "Uploaded {} files in {} seconds"
     FREE_USER_LIMIT_Q_SZE = """ """
     SLOW_URL_DECED = "Gosh that seems to be a very slow URL. Since you were screwing my home, I am in no mood to download this file. Meanwhile, why don't you try this:==> https://shrtz.me/PtsVnf6 and get me a fast URL so that I can upload to Telegram, without me slowing down for other users."
+    
+    DOWNLOAD_COMPLETE = "✅ Media Downloaded successfully\nPreparing for upload"
+    UPLOAD_COMPLETE = "THANKS FOR USING ME \n Sponsered By :- @All_Movie_Rockers"
+    REPLY_TEXT = "👩‍✈️ Reply to the media which you need to convert"
