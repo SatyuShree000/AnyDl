@@ -9,7 +9,7 @@ import time
 import os
 from PIL import Image
 from sample_config import Config
-from translation import Translation
+from translation1 import Translation
 from Tools.progress import progress_for_pyrogram
 from Tools.screenshot import take_screen_shot
 from hachoir.metadata import extractMetadata
