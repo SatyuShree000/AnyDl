@@ -66,7 +66,7 @@ async def get_link(bot, update):
         command_to_exec = [
             "curl",
             # "-H", 'Max-Downloads: 1',
-            "-H", 'Max-Days: 5', # + max_days + '',
+            #"-H", 'Max-Days: 5', # + max_days + '',
             "--upload-file", after_download_file_name,
             url
         ]
